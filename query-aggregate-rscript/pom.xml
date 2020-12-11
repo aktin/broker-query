@@ -12,7 +12,7 @@
 
 	<parent>
 		<groupId>org.aktin</groupId>
-		<artifactId>broker</artifactId>
+		<artifactId>broker-query</artifactId>
 		<version>1.0.4-SNAPSHOT</version>
 	</parent>
 
