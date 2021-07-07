@@ -6,6 +6,8 @@ import org.aktin.broker.query.util.XIncludeUnmarshaller;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.time.Period;
+
 public class TestRequest {
 
 	public static final QueryRequest getSingleRequest(int requestId){
@@ -35,6 +37,8 @@ public class TestRequest {
 		Assert.assertNotNull(r.deadline);
 		Assert.assertNotNull(r.query);
 		Assert.assertTrue(r.query.schedule instanceof RepeatedExecution);
+		Assert.assertEquals(Period.parse("P1D"), r.getQueryInterval());
+		Assert.assertEquals(6, r.getQueryIntervalHours());
 		
 	}
 

@@ -1,6 +1,7 @@
 package org.aktin.broker.query.xml;
 
 import java.time.Instant;
+import java.time.Period;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -46,6 +47,25 @@ public class QueryRequest {
 			return null;
 		}
 	}
+
+	@XmlTransient
+	public Period getQueryInterval() {
+		if (getQuery().schedule instanceof RepeatedExecution)
+			return ((RepeatedExecution) getQuery().schedule).interval;
+		else
+			return null;
+
+	}
+
+	@XmlTransient
+	public int getQueryIntervalHours() {
+		if (getQuery().schedule instanceof RepeatedExecution)
+			return ((RepeatedExecution) getQuery().schedule).intervalHours;
+		else
+			return 0;
+
+	}
+
 
 	/**
 	 * Timestamp for the earliest execution of the
