@@ -1,12 +1,9 @@
 package org.aktin.broker.query.xml;
 
 import java.util.List;
+import java.util.Set;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import org.w3c.dom.Element;
 
@@ -42,7 +39,12 @@ public class Query {
 	 */
 	@XmlElement(required=true)
 	public String description;
-	
+	/**
+	 * A set to mark a query to one or multiple affiliations.
+	 */
+	@XmlElementWrapper(required=true)
+	@XmlElement(name = "tag")
+	public Set<String> tags;
 	/**
 	 * Contact for inquiries and further
 	 * information about the query and research

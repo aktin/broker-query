@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.xml.bind.JAXB;
 import javax.xml.transform.Source;
@@ -53,6 +55,9 @@ public class TestUnmarshallDocuments {
 		Assert.assertEquals(SingleExecution.class, query.schedule.getClass());
 		SingleExecution se = (SingleExecution)query.schedule;
 		Assert.assertNotNull(se.duration);
+		ArrayList<String> tags = new ArrayList<>(query.tags);
+		Assert.assertEquals("customTag2", tags.get(0));
+		Assert.assertEquals("customTag1", tags.get(1));
 //		Assert.assertNotNull(se.reference);
 		//System.out.println("Duration:"+se.duration);
 		//System.out.println("Reference:"+se.reference);
@@ -70,9 +75,10 @@ public class TestUnmarshallDocuments {
 		Assert.assertEquals(Period.parse("P-1W"), se.duration);
 		Assert.assertEquals(Period.parse("P1D"), se.interval);
 		Assert.assertEquals(6, se.intervalHours);
+		Assert.assertEquals(Collections.<String>emptySet(), query.tags);
 	}
 	@Test
-	public void unmarshallRepeatingQuery_missingHours() {
+	public void unmarshallRepeatingQuery_missingHoursAndTags() {
 		Source xml = XIncludeUnmarshaller.getXIncludeResource("/query-repeating2.xml");
 		Query query = JAXB.unmarshal(xml, Query.class);
 		Assert.assertEquals(RepeatedExecution.class, query.schedule.getClass());
@@ -80,6 +86,7 @@ public class TestUnmarshallDocuments {
 		Assert.assertEquals(Period.parse("P-1W"), se.duration);
 		Assert.assertEquals(Period.parse("P1D"), se.interval);
 		Assert.assertEquals(0, se.intervalHours);
+		Assert.assertNull(query.tags);
 	}
 	@Test
 	public void validateQueryRequest() throws IOException, SAXException, TransformerException{

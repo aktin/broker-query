@@ -6,6 +6,10 @@
 	<title>Grippescreening</title>
 	<description>Es soll untersucht werden, ob sich in den Notaufnahmen
 	Indikatoren für den Ausbruch von Grippewellen finden lassen.</description>
+	<tags>
+		<tag>customTag1</tag>
+		<tag>customTag2</tag>
+	</tags>
 	<principal>
 		<name>Prince Ipal</name>
 		<organisation>AKTIN</organisation>
