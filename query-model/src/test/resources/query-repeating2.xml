@@ -14,7 +14,6 @@
 	<schedule xsi:type="repeatedExecution">
 		<duration>P-1W</duration>
 		<interval>P1D</interval>
-		<intervalHours>6</intervalHours>
 		<id>123</id>
 		<!-- created timestamp? -->
 	</schedule>

@@ -3,6 +3,7 @@ package org.aktin.broker.query.xml;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.time.Period;
 
 import javax.xml.bind.JAXB;
 import javax.xml.transform.Source;
@@ -59,6 +60,26 @@ public class TestUnmarshallDocuments {
 		for( Element el : query.extensions ){
 			System.out.println("Extension name="+el.getLocalName()+", ns="+el.getNamespaceURI());
 		}		
+	}
+	@Test
+	public void unmarshallRepeatingQuery() {
+		Source xml = XIncludeUnmarshaller.getXIncludeResource("/query-repeating.xml");
+		Query query = JAXB.unmarshal(xml, Query.class);
+		Assert.assertEquals(RepeatedExecution.class, query.schedule.getClass());
+		RepeatedExecution se = (RepeatedExecution)query.schedule;
+		Assert.assertEquals(Period.parse("P-1W"), se.duration);
+		Assert.assertEquals(Period.parse("P1D"), se.interval);
+		Assert.assertEquals(6, se.intervalHours);
+	}
+	@Test
+	public void unmarshallRepeatingQuery_missingHours() {
+		Source xml = XIncludeUnmarshaller.getXIncludeResource("/query-repeating2.xml");
+		Query query = JAXB.unmarshal(xml, Query.class);
+		Assert.assertEquals(RepeatedExecution.class, query.schedule.getClass());
+		RepeatedExecution se = (RepeatedExecution)query.schedule;
+		Assert.assertEquals(Period.parse("P-1W"), se.duration);
+		Assert.assertEquals(Period.parse("P1D"), se.interval);
+		Assert.assertEquals(0, se.intervalHours);
 	}
 	@Test
 	public void validateQueryRequest() throws IOException, SAXException, TransformerException{

@@ -17,7 +17,9 @@ public class RepeatedExecution extends QuerySchedule{
 	 * Estimated repeating interval. Only positive periods allowed.
 	 * This property will not cause any execution on the data warehouse side.
 	 * It is solely for information purposes.
+	 * <i>intervalHours</i> is used as a more fine-grained setting of intervals.
 	 */
 	public Period interval;
+	public int intervalHours;
 	public int id;
 }
