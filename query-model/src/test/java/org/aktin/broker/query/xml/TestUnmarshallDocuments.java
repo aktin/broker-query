@@ -55,7 +55,7 @@ public class TestUnmarshallDocuments {
 		Assert.assertEquals(SingleExecution.class, query.schedule.getClass());
 		SingleExecution se = (SingleExecution)query.schedule;
 		Assert.assertNotNull(se.duration);
-		ArrayList<String> tags = new ArrayList<>(query.tags);
+		ArrayList<String> tags = new ArrayList<>(query.principal.tags);
 		Assert.assertEquals("customTag2", tags.get(0));
 		Assert.assertEquals("customTag1", tags.get(1));
 //		Assert.assertNotNull(se.reference);
@@ -75,7 +75,7 @@ public class TestUnmarshallDocuments {
 		Assert.assertEquals(Period.parse("P-1W"), se.duration);
 		Assert.assertEquals(Period.parse("P1D"), se.interval);
 		Assert.assertEquals(6, se.intervalHours);
-		Assert.assertEquals(Collections.<String>emptySet(), query.tags);
+		Assert.assertEquals(Collections.<String>emptySet(), query.principal.tags);
 	}
 	@Test
 	public void unmarshallRepeatingQuery_missingHoursAndTags() {
@@ -86,7 +86,7 @@ public class TestUnmarshallDocuments {
 		Assert.assertEquals(Period.parse("P-1W"), se.duration);
 		Assert.assertEquals(Period.parse("P1D"), se.interval);
 		Assert.assertEquals(0, se.intervalHours);
-		Assert.assertNull(query.tags);
+		Assert.assertNull(query.principal.tags);
 	}
 	@Test
 	public void validateQueryRequest() throws IOException, SAXException, TransformerException{

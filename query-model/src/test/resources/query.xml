@@ -6,16 +6,16 @@
 	<title>Grippescreening</title>
 	<description>Es soll untersucht werden, ob sich in den Notaufnahmen
 	Indikatoren für den Ausbruch von Grippewellen finden lassen.</description>
-	<tags>
-		<tag>customTag1</tag>
-		<tag>customTag2</tag>
-	</tags>
 	<principal>
 		<name>Prince Ipal</name>
 		<organisation>AKTIN</organisation>
 		<email>it-support@aktin.org</email>
 		<phone>+49 (441) 798 - 2772</phone>
 		<!-- optional cryptographic signature at a later release <signature></signature> -->
+		<tags>
+			<tag>customTag1</tag>
+			<tag>customTag2</tag>
+		</tags>
 	</principal>
 	<schedule xsi:type="singleExecution">
 		<duration>-P1M</duration>

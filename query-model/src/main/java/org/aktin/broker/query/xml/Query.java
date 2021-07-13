@@ -11,7 +11,7 @@ import org.w3c.dom.Element;
 /**
  * Query which can be executed in a data warehouse. The actual query definition(s)
  * are specified via {@link #extensions}.
- * 
+ *
  * @author R.W.Majeed
  *
  */
@@ -20,7 +20,7 @@ import org.w3c.dom.Element;
 public class Query {
 
 // id moved to QuerySchedule
-	
+
 //	/**
 //	 * Unique identifier for this query. This identifier
 //	 * will not change, even if a query scheduled for repeated
@@ -28,7 +28,7 @@ public class Query {
 //	 */
 //	@XmlElement(required=true)
 //	public int id;
-	
+
 	/**
 	 * Human readable short description of the query.
 	 */
@@ -40,12 +40,6 @@ public class Query {
 	@XmlElement(required=true)
 	public String description;
 	/**
-	 * A set to mark a query to one or multiple affiliations.
-	 */
-	@XmlElementWrapper(required=true)
-	@XmlElement(name = "tag")
-	public Set<String> tags;
-	/**
 	 * Contact for inquiries and further
 	 * information about the query and research
 	 * project.
@@ -55,12 +49,12 @@ public class Query {
 
 	/**
 	 * Execution schedule for the query. For now,
-	 * only {@link SingleExecution} and {@link RepeatedExecution} 
+	 * only {@link SingleExecution} and {@link RepeatedExecution}
 	 * are supported.
 	 */
 	@XmlElement(required=true)
 	public QuerySchedule schedule;
-	
+
 	/**
 	 * Extension to specify query definitions as well as result/export definitions.
 	 * <p>
