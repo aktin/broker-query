@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<python-script xmlns="http://aktin.org/ns/aggregate/python">
+	<source type="application/python-script"  timeout="30s">
+<![CDATA[
+import pandas as pd
+import matplotlib.pyplot as plt
+import module1
+
+data = pd.read_csv('temp_encounters.txt', delimiter='\t')
+data_sex = pd.DataFrame(data['sex'])
+
+data_sex.to_csv('counts.txt', sep='\t', encoding='UTF-8')
+
+plt.hist(data['age'])
+plt.xlabel('Alter [Jahre]')
+plt.ylabel('Anzahl Patienten')
+plt.savefig('age.svg')
+module1.generatedFile('age.svg=images/svg')
+]]>
+	</source>
+	<!--  additional resource files to be placed in the directory
+	  before execution of the script. e.g. lookup tables, additional script modules, etc. -->
+	<resource file="module1.py" type="text/plain">
+<![CDATA[
+import numpy as np
+
+
+def generatedFile(name):
+    f = open("python-generated-files.txt", "a")
+    f.write(f'{name}\n')
+    f.close()
+]]>
+	</resource>
+
+	<!-- TODO need wildcard result file list? -->
+	<result file="counts.txt" type="text/tab-separated-values"/>
+	<result-list file="python-generated-files.txt"/>
+</python-script>
