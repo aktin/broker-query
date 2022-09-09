@@ -42,7 +42,12 @@ public class TestZipExport {
 		Enumeration<? extends ZipEntry> e = z.entries();
 		ZipEntry ze = e.nextElement();
 		Assert.assertEquals("patients.txt", ze.getName());
-		Assert.assertEquals(12+3*System.lineSeparator().length(), ze.getSize());
+		String systemName = System.getProperty("os.name");
+		if (systemName.equals("Linux")) {
+			Assert.assertEquals(12 + 3 * System.lineSeparator().length() * 2, ze.getSize());
+		} else if (systemName.contains("Windows")) {
+			Assert.assertEquals(12 + 3 * System.lineSeparator().length(), ze.getSize());
+		}
 		Assert.assertEquals("visits.txt", e.nextElement().getName());
 		Assert.assertFalse(e.hasMoreElements());
 		z.close();
